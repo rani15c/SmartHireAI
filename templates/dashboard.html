@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>SmartHire AI - Admin Dashboard</title>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        SmartHire AI
+    </div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+</nav>
+
+
+<div class="container dashboard">
+
+    <h1>Admin Dashboard</h1>
+
+    <h2>Faculty Candidate Ranking</h2>
+    <div class="stats">
+
+    <div class="stat-card">
+        <h3>Total Candidates</h3>
+        <p>{{ total_candidates }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Selected</h3>
+        <p>{{ selected }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Rejected</h3>
+        <p>{{ rejected }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Under Review</h3>
+        <p>{{ under_review }}</p>
+    </div>
+
+</div>
+
+    <p>
+        Review candidate performance and update selection status.
+    </p>
+
+
+    {% if candidates %}
+
+    <table>
+
+        <tr>
+
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Qualification</th>
+            <th>Experience</th>
+            <th>Specialization</th>
+            <th>Screening</th>
+            <th>Interview</th>
+            <th>Final Score</th>
+            <th>Recommendation</th>
+            <th>Selection</th>
+
+        </tr>
+
+
+        {% for candidate in candidates %}
+
+        {% set final_score =
+            (candidate["score"] + candidate["interview_score"]) / 2
+        %}
+
+
+        <tr>
+
+            <td>
+                {{ loop.index }}
+            </td>
+
+
+            <td>
+                {{ candidate["name"] }}
+            </td>
+
+
+            <td>
+                {{ candidate["qualification"] }}
+            </td>
+
+
+            <td>
+                {{ candidate["experience"] }} years
+            </td>
+
+
+            <td>
+                {{ candidate["specialization"] }}
+            </td>
+
+
+            <td>
+                {{ candidate["score"] }}/100
+            </td>
+
+
+            <td>
+                {{ candidate["interview_score"] }}/100
+            </td>
+
+
+            <td>
+
+                <strong>
+                    {{ final_score|round|int }}/100
+                </strong>
+
+            </td>
+
+
+            <td>
+
+                {% if final_score >= 80 %}
+
+                    <span class="success">
+                        Highly Recommended
+                    </span>
+
+                {% elif final_score >= 65 %}
+
+                    <span class="success">
+                        Recommended
+                    </span>
+
+                {% elif final_score >= 50 %}
+
+                    <span class="warning">
+                        Review Required
+                    </span>
+
+                {% else %}
+
+                    <span class="warning">
+                        Not Recommended
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+
+            <td>
+
+                <form
+                    action="/update_status/{{ candidate['id'] }}"
+                    method="POST"
+                >
+
+                    <select name="selection_status">
+
+                        <option
+                            value="Under Review"
+                            {% if candidate["selection_status"] == "Under Review" %}
+                            selected
+                            {% endif %}
+                        >
+                            Under Review
+                        </option>
+
+
+                        <option
+                            value="Selected"
+                            {% if candidate["selection_status"] == "Selected" %}
+                            selected
+                            {% endif %}
+                        >
+                            Selected
+                        </option>
+
+
+                        <option
+                            value="Rejected"
+                            {% if candidate["selection_status"] == "Rejected" %}
+                            selected
+                            {% endif %}
+                        >
+                            Rejected
+                        </option>
+
+                    </select>
+
+                    <button type="submit">
+                        Update
+                    </button>
+
+                </form>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    {% else %}
+
+        <p>No candidates have been registered yet.</p>
+
+    {% endif %}
+
+</div>
+
+</body>
+
+</html>

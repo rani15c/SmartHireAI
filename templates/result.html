@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SmartHire AI - Screening Result</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>SmartHire AI</h1>
+
+    <h2>AI Screening Result</h2>
+
+    <h3>Hello, {{ name }}</h3>
+
+    <div class="result">
+
+        <h3>Screening Score: {{ score }}/100</h3>
+
+        <h2>Status: {{ status }}</h2>
+
+        <h3>AI Evaluation</h3>
+
+        <ul>
+            {% for reason in reasons %}
+                <li>{{ reason }}</li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+    <a href="/chatbot/{{ candidate_id }}">
+        <button>
+            Start AI Interview
+        </button>
+    </a>
+
+    <br>
+
+    <a href="/">
+        <button>
+            Screen Another Candidate
+        </button>
+    </a>
+
+</div>
+
+</body>
+</html>

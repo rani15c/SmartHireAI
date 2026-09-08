@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SmartHire AI</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        SmartHire AI
+    </div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/dashboard">Admin Dashboard</a>
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+    <h1>SmartHire AI</h1>
+
+    <h2>College Faculty Recruitment Portal</h2>
+
+    <p>
+        AI-powered recruitment and screening system
+        for college faculty selection.
+    </p>
+
+    <form action="/screen" method="POST">
+
+        <label>Full Name</label>
+        <input type="text" name="name" required>
+
+        <label>Email</label>
+        <input type="email" name="email" required>
+
+        <label>Qualification</label>
+
+        <select name="qualification" required>
+
+            <option value="">Select Qualification</option>
+            <option value="Ph.D">Ph.D</option>
+            <option value="M.Tech">M.Tech</option>
+            <option value="M.E">M.E</option>
+            <option value="M.Sc">M.Sc</option>
+            <option value="B.Tech">B.Tech</option>
+
+        </select>
+
+        <label>Experience (Years)</label>
+
+        <input
+            type="number"
+            name="experience"
+            min="0"
+            required
+        >
+
+        <label>Specialization</label>
+
+        <select name="specialization" required>
+
+            <option value="">Select Specialization</option>
+
+            <option value="Artificial Intelligence">
+                Artificial Intelligence
+            </option>
+
+            <option value="Machine Learning">
+                Machine Learning
+            </option>
+
+            <option value="Computer Science">
+                Computer Science
+            </option>
+
+            <option value="Data Science">
+                Data Science
+            </option>
+
+            <option value="Information Technology">
+                Information Technology
+            </option>
+
+        </select>
+
+        <button type="submit">
+            Start AI Screening
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

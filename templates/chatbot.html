@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SmartHire AI - AI Interview</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>SmartHire AI</h1>
+
+    <h2>AI Faculty Interview</h2>
+
+    <h3>Candidate: {{ candidate["name"] }}</h3>
+
+    <p>
+        Qualification: {{ candidate["qualification"] }}
+    </p>
+
+    <p>
+        Specialization: {{ candidate["specialization"] }}
+    </p>
+
+    <p>
+        Answer the following questions to complete your AI screening.
+    </p>
+
+    <form action="/chatbot/{{ candidate['id'] }}" method="POST">
+
+        <label>
+            1. Why do you want to join our college as a faculty member?
+        </label>
+
+        <textarea name="q1" required></textarea>
+
+
+        <label>
+            2. How would you explain a difficult technical topic to students?
+        </label>
+
+        <textarea name="q2" required></textarea>
+
+
+        <label>
+            3. How do you keep students engaged during a lecture?
+        </label>
+
+        <textarea name="q3" required></textarea>
+
+
+        <label>
+            4. How do you handle a student who is struggling academically?
+        </label>
+
+        <textarea name="q4" required></textarea>
+
+
+        <label>
+            5. How do you use technology in teaching?
+        </label>
+
+        <textarea name="q5" required></textarea>
+
+
+        <button type="submit">
+            Submit AI Interview
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

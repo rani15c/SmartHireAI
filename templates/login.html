@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>SmartHire AI - Admin Login</title>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>SmartHire AI</h1>
+
+    <h2>Admin Login</h2>
+
+    <p>Login to access the recruitment dashboard.</p>
+
+    {% if error %}
+
+        <p class="warning">{{ error }}</p>
+
+    {% endif %}
+
+    <form action="/login" method="POST">
+
+        <label>Username</label>
+
+        <input
+            type="text"
+            name="username"
+            required
+        >
+
+        <label>Password</label>
+
+        <input
+            type="password"
+            name="password"
+            required
+        >
+
+        <button type="submit">
+            Login
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="/">
+        <button>Back to Home</button>
+    </a>
+
+</div>
+
+</body>
+
+</html>
