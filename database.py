@@ -23,9 +23,21 @@ def create_table():
             score INTEGER NOT NULL,
             status TEXT NOT NULL,
             interview_score INTEGER DEFAULT 0,
-            interview_status TEXT DEFAULT 'Not Completed'
+            interview_status TEXT DEFAULT 'Not Completed',
+            selection_status TEXT DEFAULT 'Under Review'
         )
     """)
+
+    # Keep existing local databases compatible with the current dashboard.
+    candidate_columns = {
+        column[1]
+        for column in connection.execute("PRAGMA table_info(candidates)")
+    }
+    if "selection_status" not in candidate_columns:
+        connection.execute("""
+            ALTER TABLE candidates
+            ADD COLUMN selection_status TEXT DEFAULT 'Under Review'
+        """)
 
     connection.execute("""
         CREATE TABLE IF NOT EXISTS admins (
